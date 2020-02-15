@@ -29,6 +29,18 @@ class CountryRepositoryTest extends JooqExampleApplicationTests {
 
     @Test
     void update() {
+        Country country = repository.insert(createCountry());
+        Country toUpdate = new Country();
+        toUpdate.setId(country.getId());
+        toUpdate.setGovernmentForm(
+                Arrays
+                        .stream(GovernmentForm.values())
+                        .filter(e -> !e.equals(country.getGovernmentForm()))
+                        .findAny()
+                        .orElse(GovernmentForm.UNITARY)
+        );
+        Country updated = repository.update(toUpdate);
+        System.out.println();
     }
 
     @Test
