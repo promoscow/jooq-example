@@ -8,6 +8,8 @@ import ru.xpendence.jooqexample.domain.tables.Cities;
 import ru.xpendence.jooqexample.dto.City;
 import ru.xpendence.jooqexample.repository.CrudRepository;
 
+import java.util.List;
+
 /**
  * Описание класса: пару слов что это такое и для чего нужен.
  *
@@ -40,8 +42,11 @@ public class CityRepository implements CrudRepository<City> {
     }
 
     @Override
-    public City findAll(Condition condition) {
-        return null;
+    public List<City> findAll(Condition condition) {
+        return dsl.selectFrom(Cities.CITIES)
+                .where(condition)
+                .fetch()
+                .into(City.class);
     }
 
     @Override

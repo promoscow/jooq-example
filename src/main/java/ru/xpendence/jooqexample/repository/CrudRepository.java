@@ -2,6 +2,8 @@ package ru.xpendence.jooqexample.repository;
 
 import org.jooq.Condition;
 
+import java.util.List;
+
 /**
  * Описание класса: пару слов что это такое и для чего нужен.
  *
@@ -18,7 +20,7 @@ public interface CrudRepository<T> {
 
     T find(Long id);
 
-    T findAll(Condition condition);
+    List<T> findAll(Condition condition);
 
     Boolean delete(Long id);
 }

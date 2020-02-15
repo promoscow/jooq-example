@@ -4,9 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
+import ru.xpendence.jooqexample.domain.tables.Cities;
 import ru.xpendence.jooqexample.domain.tables.Countries;
 import ru.xpendence.jooqexample.dto.Country;
 import ru.xpendence.jooqexample.repository.CrudRepository;
+
+import java.util.List;
 
 /**
  * Описание класса: пару слов что это такое и для чего нужен.
@@ -19,6 +22,7 @@ import ru.xpendence.jooqexample.repository.CrudRepository;
 public class CountryRepository implements CrudRepository<Country> {
 
     private final DSLContext dsl;
+    private final CityRepository cityRepository;
 
     @Override
     public Country insert(Country country) {
@@ -36,11 +40,18 @@ public class CountryRepository implements CrudRepository<Country> {
 
     @Override
     public Country find(Long id) {
-        return null;
+        return dsl.selectFrom(Countries.COUNTRIES)
+                .where(Countries.COUNTRIES.ID.eq(id))
+                .fetchAny()
+                .map(r -> {
+                    Country country = r.into(Country.class);
+                    country.setCities(cityRepository.findAll(Cities.CITIES.COUNTRY_ID.eq(country.getId())));
+                    return country;
+                });
     }
 
     @Override
-    public Country findAll(Condition condition) {
+    public List<Country> findAll(Condition condition) {
         return null;
     }
 
