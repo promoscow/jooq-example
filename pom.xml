@@ -21,6 +21,7 @@
         <db.url>jdbc:postgresql://localhost:5432/jooq_db</db.url>
         <db.username>jooq_user</db.username>
         <db.password>jooq_password</db.password>
+        <commons.lang3.version>3.9</commons.lang3.version>
     </properties>
 
     <dependencies>
@@ -41,6 +42,12 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons.lang3.version}</version>
         </dependency>
 
         <dependency>
