@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/jooq_db
+    username: jooq_user
+    password: jooq_password
+    continue-on-error: true
