@@ -121,13 +121,6 @@ public class CountryRepository implements CrudRepository<Country> {
                 .execute() == SUCCESS_CODE;
     }
 
-    public List<Country> findPopulationMoreThan(Integer amount) {
-        return dsl.selectFrom(Countries.COUNTRIES)
-                .where(Countries.COUNTRIES.POPULATION.greaterThan(amount))
-                .fetch()
-                .into(Country.class);
-    }
-
     public static <T> String nameOrNull(T enumeration) {
         return Objects.isNull(enumeration) ? null : enumeration instanceof Enum ? ((Enum) enumeration).name() : null;
     }
