@@ -33,12 +33,20 @@ public class CityRepository implements CrudRepository<City> {
 
     @Override
     public City update(City city) {
-        return null;
+        return dsl.update(Cities.CITIES)
+                .set(dsl.newRecord(Cities.CITIES, city))
+                .where(Cities.CITIES.ID.eq(city.getId()))
+                .returning()
+                .fetchOne()
+                .into(City.class);
     }
 
     @Override
     public City find(Long id) {
-        return null;
+        return dsl.selectFrom(Cities.CITIES)
+                .where(Cities.CITIES.ID.eq(id))
+                .fetchAny()
+                .into(City.class);
     }
 
     @Override
@@ -51,6 +59,8 @@ public class CityRepository implements CrudRepository<City> {
 
     @Override
     public Boolean delete(Long id) {
-        return null;
+        return dsl.deleteFrom(Cities.CITIES)
+                .where(Cities.CITIES.ID.eq(id))
+                .execute() == SUCCESS_CODE;
     }
 }

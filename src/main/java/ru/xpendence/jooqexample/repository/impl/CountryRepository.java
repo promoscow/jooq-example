@@ -60,6 +60,15 @@ public class CountryRepository implements CrudRepository<Country> {
                 .into(Country.class);
     }
 
+    public Long insertAndReturnId(Country country) {
+        return dsl.insertInto(Countries.COUNTRIES)
+                .set(dsl.newRecord(Countries.COUNTRIES, country))
+                .returning(Countries.COUNTRIES.ID)
+                .fetchOptional()
+                .orElseThrow(() -> new DataAccessException("Error inserting entity: " + country.getId()))
+                .get(Countries.COUNTRIES.ID);
+    }
+
     @Override
     public Country update(Country country) {
         return dsl.update(Countries.COUNTRIES)

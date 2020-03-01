@@ -45,6 +45,12 @@ class CountryRepositoryTest {
     }
 
     @Test
+    void insertAndReturnId() {
+        Long id = repository.insertAndReturnId(createCountry());
+        assertNotNull(id);
+    }
+
+    @Test
     void update() {
         Country country = repository.insert(createCountry());
         country.setPopulation(100500);
