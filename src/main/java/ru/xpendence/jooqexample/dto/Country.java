@@ -1,6 +1,8 @@
 package ru.xpendence.jooqexample.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.xpendence.jooqexample.dto.type.GovernmentForm;
 
 import java.util.List;
@@ -12,6 +14,8 @@ import java.util.List;
  * @since 15.02.2020
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Country {
 
     private Long id;

@@ -23,7 +23,7 @@ class CountryRepositoryTest extends JooqExampleApplicationTests {
 
     @Test
     void insert() {
-        Country country = repository.insert(createCountry());
+        Country country = repository.insertWithUnmapper(createCountry());
         System.out.println();
     }
 
@@ -45,6 +45,9 @@ class CountryRepositoryTest extends JooqExampleApplicationTests {
 
     @Test
     void find() {
+        Country country = repository.insert(createCountry());
+        Country found = repository.findWithCustomMapper(country.getId());
+        System.out.println();
     }
 
     @Test
